@@ -9,6 +9,8 @@ import SwiftUI
 
 @main
 struct MyCoreDataApp: App {
+    let persistenceController = PersistenceController()
+
     var body: some Scene {
         WindowGroup {
             ContentView()
