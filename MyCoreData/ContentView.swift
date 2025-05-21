@@ -11,14 +11,17 @@ import SwiftUI
 struct ContentView: View {
     @Environment(\.managedObjectContext) var viewContext
 
+    @FetchRequest(sortDescriptors: [])
+    var humans: FetchedResults<Human>
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        List {
+            ForEach(humans) { human in
+                if (human.name?.isEmpty) == false {
+                    Text(human.name!)
+                }
+            }
         }
-        .padding()
     }
 }
 
