@@ -14,6 +14,8 @@ struct ContentView: View {
     @FetchRequest(sortDescriptors: [])
     var humans: FetchedResults<Human>
 
+    @State var name = ""
+
     var body: some View {
         List {
             ForEach(humans) { human in
@@ -22,21 +24,24 @@ struct ContentView: View {
                 }
             }
 
-            Button(action: addHuman) {
-                Text("人間を増やす")
-            }
+            TextField("人間の名前", text: $name)
+                .onSubmit {
+                    addHuman()
+                }
         }
     }
 
     func addHuman() {
         let newHuman = Human(context: viewContext)
-        newHuman.name = "test_human"
+        newHuman.name = name
 
         do {
             try viewContext.save()
         } catch {
             fatalError("Failed save.")
         }
+
+        name = ""
     }
 }
 
