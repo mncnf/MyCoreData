@@ -21,6 +21,21 @@ struct ContentView: View {
                     Text(human.name!)
                 }
             }
+
+            Button(action: addHuman) {
+                Text("人間を増やす")
+            }
+        }
+    }
+
+    func addHuman() {
+        let newHuman = Human(context: viewContext)
+        newHuman.name = "test_human"
+
+        do {
+            try viewContext.save()
+        } catch {
+            fatalError("Failed save.")
         }
     }
 }
