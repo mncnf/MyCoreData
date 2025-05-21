@@ -20,7 +20,18 @@ struct ContentView: View {
         List {
             ForEach(humans) { human in
                 if (human.name?.isEmpty) == false {
-                    Text(human.name!)
+                    HStack {
+                        if human.checked {
+                            Text("☑︎")
+                        } else {
+                            Text("◻︎")
+                        }
+                        Button(action: {
+                            human.checked.toggle()
+                        }) {
+                            Text(human.name!)
+                        }
+                    }
                 }
             }
 
