@@ -39,6 +39,10 @@ struct ContentView: View {
                 .onSubmit {
                     addHuman()
                 }
+
+            Button(action: deleteHuman) {
+                Text("人間を減らす")
+            }
         }
     }
 
@@ -53,6 +57,20 @@ struct ContentView: View {
         }
 
         name = ""
+    }
+
+    func deleteHuman() {
+        for human in humans {
+            if human.checked {
+                viewContext.delete(human)
+            }
+        }
+
+        do {
+            try viewContext.save()
+        } catch {
+            fatalError("Failed save.")
+        }
     }
 }
 
